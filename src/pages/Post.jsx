@@ -33,34 +33,35 @@ export default function Post() {
     };
 
     return post ? (
-        <div className="py-8">
+        <div className="py-12 bg-background min-h-screen">
             <Container>
-                <div className="w-full flex bg-silver-600 justify-center mb-4 relative p-2">
+                <div className="w-full flex justify-center mb-8 relative rounded-xl overflow-hidden shadow-2xl">
                     <img
                         src={appwriteService.getFileView(post.featuredImage)}
                         alt={post.title}
-                        className="rounded-xl"
+                        className="rounded-xl object-cover w-full max-h-[500px]"
                     />
 
                     {isAuthor && (
-                        <div className="absolute right-6 top-6">
+                        <div className="absolute right-6 top-6 flex gap-2">
                             <Link to={`/edit-post/${post.$id}`}>
-                                <Button bgColor="bg-gray-500" className="mr-3">
+                                <Button bgColor="bg-green-500" className="mr-3 hover:bg-green-600">
                                     Edit
                                 </Button>
                             </Link>
-                            <Button bgColor="bg-red-500" onClick={deletePost}>
+                            <Button bgColor="bg-red-500" className="hover:bg-red-600" onClick={deletePost}>
                                 Delete
                             </Button>
                         </div>
                     )}
                 </div>
-                <div className="w-full mb-6">
-                    <h1 className="text-2xl font-bold">{post.title}</h1>
+                <div className="w-full mb-6 text-center">
+                    <h1 className="text-4xl md:text-5xl font-bold text-text-main mb-4">{post.title}</h1>
+                    <div className="w-20 h-1 bg-primary mx-auto rounded-full"></div>
                 </div>
-                <div className="browser-css">
+                <div className="browser-css prose prose-lg prose-invert mx-auto max-w-4xl text-text-muted">
                     {parse(post.content)}
-                    </div>
+                </div>
             </Container>
         </div>
     ) : null;
